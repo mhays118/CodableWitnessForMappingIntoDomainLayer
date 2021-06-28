@@ -10,7 +10,11 @@ let package = Package(
             targets: ["Domain", "RemoteClient"]),
     ],
     dependencies: [
-        .package(name: "swift-coding", url: "https://github.com/lukeredpath/swift-coding", from: "0.0.1"),
+        .package(
+            name: "swift-coding",
+            url: "https://github.com/lukeredpath/swift-coding",
+            .revision("38860e6255f448b7c6b2e053c0b8fbb679a0aa83")
+        ),
     ],
     targets: [
         .target(

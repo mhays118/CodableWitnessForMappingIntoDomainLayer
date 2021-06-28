@@ -2,6 +2,13 @@ import Domain
 import Coding
 import Foundation
 
+// MARK: - Decoding Strategies
+extension Address {
+    static var standard = zip(with: Address.init)(street, city, state, zipCode)
+}
+
+// MARK: Coding Keys
+
 extension Address {
     enum CodingKeys: String, CodingKey {
         case street
@@ -10,6 +17,8 @@ extension Address {
         case zipCode = "zip"
     }
 }
+
+// MARK: - Decoding Properties
 
 extension Decoding where Value == Address {
     static var street: Decoding<String> = Decoding<String>
@@ -26,7 +35,4 @@ extension Decoding where Value == Address {
         .map(Int.init)
         .replaceNil(with: 0)
 
-    static var standard: Decoding<Address> {
-        zip(with: Address.init)(street, city, state, zipCode)
-    }
 }

@@ -13,6 +13,7 @@ extension Decoding where Value == User {
 // MARK: Coding Keys
 
 extension User {
+
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"
@@ -41,11 +42,7 @@ extension Decoding where Value == User {
         }
     }
 
-    // ⚠️ This does NOT work
-    // It will try pulling all the properties on Address directly on to `User` instead of having
-    // a nested object.
-    //
-    // Also cannot do `.withKey(User.CodingKeys.address)` afterwards,
-    // as `address does NOT conform to `Decodable`
-    static var address: Decoding<Address> = .standard
+    static var address: Decoding<Address?> = Decoding<Address>
+        .standard
+        .optionalWithKey(User.CodingKeys.address)
 }
